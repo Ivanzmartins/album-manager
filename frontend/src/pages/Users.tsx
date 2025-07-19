@@ -1,9 +1,11 @@
 import { UserCard } from "@/components/UserCard";
-import { mockUsers } from "@/data/mockUsers";
+import { useUsers } from "@/hooks/useUsers";
 import { useNavigate } from "react-router-dom";
 
 const Users = () => {
   const navigate = useNavigate();
+  const users = useUsers();
+
   return (
     <div className="min-h-screen bg-photo-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -15,11 +17,13 @@ const Users = () => {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {mockUsers.map((user) => (
+          {users.map((user) => (
             <UserCard
               key={user.id}
               user={user}
-              onClick={() => navigate(`/users/${user.id}/albums`)}
+              onClick={() =>
+                navigate(`/users/${user.id}/albums`, { state: { user } })
+              }
             />
           ))}
         </div>
