@@ -1,5 +1,5 @@
 import { UserCard } from "@/components/UserCard";
-import { mockUsers } from "@/data/mockData";
+import { mockUsers } from "@/data/mockUsers";
 import { useNavigate } from "react-router-dom";
 
 const Users = () => {
@@ -19,7 +19,9 @@ const Users = () => {
             <UserCard
               key={user.id}
               user={user}
-              onClick={() => navigate(`/users/${user.id}/albums`)}
+              onClick={() =>
+                navigate(`/users/${user.id}/albums`, { state: { user } })
+              }
             />
           ))}
         </div>
