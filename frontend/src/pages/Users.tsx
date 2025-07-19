@@ -19,9 +19,7 @@ const Users = () => {
             <UserCard
               key={user.id}
               user={user}
-              onClick={() =>
-                navigate(`/users/${user.id}/albums`, { state: { user } })
-              }
+              onClick={() => navigate(`/users/${user.id}/albums`)}
             />
           ))}
         </div>
