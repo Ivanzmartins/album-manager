@@ -7,6 +7,7 @@ import UserAlbums from "./pages/UserAlbuns";
 import AlbumPhotos from "./pages/AlbumPhotos";
 import { Navigation } from "./components/Navigation";
 import Upload from "./pages/Upload";
+import { ToastContainer } from "react-toastify";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
+    <ToastContainer position="top-center" autoClose={5000} />
   </QueryClientProvider>
 );
 
