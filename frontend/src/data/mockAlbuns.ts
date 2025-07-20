@@ -10,16 +10,7 @@ export const mockAlbums: Album[] = [
 
     createdAt: "2024-01-15",
   },
-  {
-    id: "2",
-    title: "Paisagens",
-    description: "Paisagens ao redor do mundo",
-    userId: "1",
-    photoCount: 4,
-    coverPhoto:
-      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
-    createdAt: "2024-03-10",
-  },
+
   {
     id: "5",
     title: "Wildlife Photography",
@@ -49,5 +40,15 @@ export const mockAlbums: Album[] = [
     coverPhoto:
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
     createdAt: "2024-03-20",
+  },
+  {
+    id: "2",
+    title: "Paisagens",
+    description: "Paisagens ao redor do mundo",
+    userId: "1",
+    photoCount: 4,
+    coverPhoto:
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
+    createdAt: "2024-03-10",
   },
 ];

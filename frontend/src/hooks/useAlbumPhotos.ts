@@ -8,7 +8,7 @@ export function useAlbumPhotos(albumId: string) {
   useEffect(() => {
     const filtered = mockPhotos.filter((p) => p.albumId === albumId);
     setPhotos(filtered);
-    // Futuro: axios.get(`/api/albums/${albumId}/photos`).then(...)
+    // TODO: axios.get(`/api/albums/${albumId}/photos`).then(...)
   }, [albumId]);
 
   return photos;
