@@ -1,10 +1,11 @@
+import { useCurrentUser, useOtherUsers } from "@/hooks/useUsers";
 import { UserCard } from "@/components/UserCard";
-import { useUsers } from "@/hooks/useUsers";
 import { useNavigate } from "react-router-dom";
 
 const Users = () => {
   const navigate = useNavigate();
-  const users = useUsers();
+  const currentUser = useCurrentUser();
+  const otherUsers = useOtherUsers();
 
   return (
     <div className="min-h-screen bg-photo-background">
@@ -16,16 +17,30 @@ const Users = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {users.map((user) => (
-            <UserCard
-              key={user.id}
-              user={user}
-              onClick={() =>
-                navigate(`/users/${user.id}/albums`, { state: { user } })
-              }
-            />
-          ))}
+        {currentUser && (
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold mb-4">Meu Perfil</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <UserCard
+                user={currentUser}
+                onClick={() => navigate(`/users/${currentUser.id}/albums`)}
+                isCurrentUser
+              />
+            </div>
+          </div>
+        )}
+
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Outros Usuários</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {otherUsers.map((user) => (
+              <UserCard
+                key={user.id}
+                user={user}
+                onClick={() => navigate(`/users/${user.id}/albums`)}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
