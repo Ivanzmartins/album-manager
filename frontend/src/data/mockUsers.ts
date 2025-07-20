@@ -1,9 +1,9 @@
 import { User } from "@/types/User";
 
-export const mockUsers: User[] = [
+export const mockDataUsers: User[] = [
   {
     id: "1",
-    username: "Meus álbuns",
+    username: "Ivan",
     email: "ivan@example.com",
   },
   {
@@ -22,3 +22,6 @@ export const mockUsers: User[] = [
     email: "paulo@example.com",
   },
 ];
+
+export const mockUsers: User[] = mockDataUsers.filter((u) => u.id !== "1");
+export const currentUser = mockDataUsers.find((u) => u.id === "1");
