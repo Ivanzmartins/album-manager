@@ -1,11 +1,14 @@
 import { useParams, useLocation, useNavigate } from "react-router-dom";
-
-import { ArrowLeft, Mail, User as UserIcon } from "lucide-react";
+import { ArrowLeft, Mail, User as UserIcon, Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AlbumCard } from "@/components/AlbumCard";
 import type { User } from "@/types/User";
 import { useUserById } from "@/hooks/useUsers";
 import { useUserAlbums } from "@/hooks/useAlbuns";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+import { toast } from "react-toastify";
+import { Album } from "@/types/Album";
 
 interface LocationState {
   user: User;
@@ -20,6 +23,11 @@ const UserAlbums = () => {
   const userFromHook = useUserById(userId);
   const user = state?.user ?? userFromHook;
   const albums = useUserAlbums(userId);
+  const [editingAlbumId, setEditingAlbumId] = useState<string | null>(null);
+  const [albumTitle, setAlbumTitle] = useState("");
+  const [albumDescription, setAlbumDescription] = useState("");
+
+  const isAdmin = userId === "1";
 
   if (!user) {
     return (
@@ -31,6 +39,23 @@ const UserAlbums = () => {
       </div>
     );
   }
+
+  const handleEditAlbum = (album: Album) => {
+    setEditingAlbumId(album.id);
+    setAlbumTitle(album.title);
+    setAlbumDescription(album.description || "");
+  };
+
+  const handleSaveAlbum = () => {
+    //TODO: IMPLEMENT ALBUM UPDATE
+    toast.success("Álbum atualizado com sucesso!");
+    setEditingAlbumId(null);
+  };
+
+  const handleDeleteAlbum = (albumId: string) => {
+    //TODO: IMPLEMENT ALBUM DELETION
+    toast.success("Álbum deletado com sucesso!");
+  };
 
   return (
     <div className="min-h-screen bg-photo-background">
@@ -51,17 +76,70 @@ const UserAlbums = () => {
           </p>
         </div>
 
-        <h2 className="text-xl font-semibold mb-4">Albums</h2>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-xl font-semibold">Albums</h2>
+        </div>
+
         {albums.length ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {albums.map((album) => (
-              <AlbumCard
-                key={album.id}
-                album={album}
-                onClick={() =>
-                  navigate(`/users/${user.id}/albums/${album.id}/photos`)
-                }
-              />
+              <div key={album.id} className="relative">
+                {editingAlbumId === album.id ? (
+                  <div className="bg-photo-card p-4 rounded-lg border shadow-card space-y-4">
+                    <Input
+                      value={albumTitle}
+                      onChange={(e) => setAlbumTitle(e.target.value)}
+                      placeholder="Título do álbum"
+                    />
+                    <Input
+                      value={albumDescription}
+                      onChange={(e) => setAlbumDescription(e.target.value)}
+                      placeholder="Descrição do álbum"
+                    />
+                    <div className="flex gap-2">
+                      <Button onClick={handleSaveAlbum} size="sm">
+                        Salvar
+                      </Button>
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setEditingAlbumId(null)}
+                      >
+                        Cancelar
+                      </Button>
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    <AlbumCard
+                      album={album}
+                      onClick={() =>
+                        navigate(`/users/${user.id}/albums/${album.id}/photos`)
+                      }
+                    />
+                    {isAdmin && (
+                      <div className="absolute top-2 right-2 flex gap-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="h-8 w-8 p-0 bg-background/80"
+                          onClick={() => handleEditAlbum(album)}
+                        >
+                          <Edit className="h-3 w-3" />
+                        </Button>
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          className="h-8 w-8 p-0 bg-background/80"
+                          onClick={() => handleDeleteAlbum(album.id)}
+                        >
+                          <Trash2 className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
             ))}
           </div>
         ) : (
