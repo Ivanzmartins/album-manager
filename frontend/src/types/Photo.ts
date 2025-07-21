@@ -5,5 +5,4 @@ export interface Photo {
   url: string;
   albumId: string;
   userId: string;
-  uploadedAt: string;
 }

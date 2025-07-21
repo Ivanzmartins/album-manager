@@ -18,6 +18,7 @@
       "@types/jest": "^30.0.0",
       "@types/supertest": "^6.0.3",
       "axios": "^1.10.0",
+      "cors": "^2.8.5",
       "express": "^5.1.0",
       "jest": "^30.0.4",
       "pg": "^8.14.1",
@@ -28,6 +29,7 @@
       "typescript": "^5.8.3"
    },
    "devDependencies": {
+      "@types/cors": "^2.8.19",
       "@types/node": "^22.13.10",
       "nodemon": "^3.1.10",
       "ts-node": "^10.9.2",

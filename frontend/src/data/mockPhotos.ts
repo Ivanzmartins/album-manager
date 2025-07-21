@@ -8,7 +8,6 @@ export const mockPhotos: Photo[] = [
     url: "https://images.unsplash.com/photo-1606800052052-a08af7148866?w=600",
     albumId: "1",
     userId: "1",
-    uploadedAt: "2024-01-15",
   },
   {
     id: "6",
@@ -17,7 +16,6 @@ export const mockPhotos: Photo[] = [
     url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600",
     albumId: "2",
     userId: "1",
-    uploadedAt: "2024-02-21",
   },
   {
     id: "7",
@@ -26,7 +24,6 @@ export const mockPhotos: Photo[] = [
     url: "https://images.unsplash.com/photo-1511895426328-dc8714191300?w=600",
     albumId: "2",
     userId: "1",
-    uploadedAt: "2024-02-22",
   },
   {
     id: "8",
@@ -35,7 +32,6 @@ export const mockPhotos: Photo[] = [
     url: "https://images.unsplash.com/photo-1520986606214-8b456906c813?w=600",
     albumId: "4",
     userId: "2",
-    uploadedAt: "2024-01-25",
   },
   {
     id: "9",
@@ -44,7 +40,6 @@ export const mockPhotos: Photo[] = [
     url: "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=600",
     albumId: "4",
     userId: "2",
-    uploadedAt: "2024-01-26",
   },
   {
     id: "10",
@@ -53,7 +48,6 @@ export const mockPhotos: Photo[] = [
     url: "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?w=600",
     albumId: "4",
     userId: "2",
-    uploadedAt: "2024-01-27",
   },
   {
     id: "11",
@@ -62,7 +56,6 @@ export const mockPhotos: Photo[] = [
     url: "https://images.unsplash.com/photo-1564349683136-77e08dba1ef7?w=600",
     albumId: "6",
     userId: "3",
-    uploadedAt: "2024-02-01",
   },
   {
     id: "13",
@@ -71,6 +64,5 @@ export const mockPhotos: Photo[] = [
     url: "https://images.unsplash.com/photo-1546026423-cc4642628d2b?w=600",
     albumId: "6",
     userId: "3",
-    uploadedAt: "2024-02-03",
   },
 ];
