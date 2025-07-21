@@ -1,6 +1,7 @@
 import { api } from "@/api/api";
+import { toast } from "react-toastify";
 
-export async function updatePhoto({ id, title, description }) {
+export async function updateAlbum({ id, title, description }) {
   try {
     await api.patch(`/albums/${id}`, {
       title,

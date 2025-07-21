@@ -8,7 +8,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "react-toastify";
 import { Album } from "@/types/Album";
-import { updatePhoto } from "@/api/editAlbum";
+import { updateAlbum } from "@/api/editAlbum";
 import { useUserAlbums } from "@/hooks/useAlbumPhotos";
 import { deleteAlbum } from "@/api/deleteAlbum";
 
@@ -57,7 +57,7 @@ const UserAlbums = () => {
         return;
       }
 
-      await updatePhoto({
+      await updateAlbum({
         id: editingAlbumId,
         title: albumTitle.trim(),
         description: albumDescription.trim(),

@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "react-toastify";
 import type { Photo } from "@/types/Photo";
+import { deletePhoto } from "@/api/deletePhoto";
+import { updatePhoto } from "@/api/updatePhoto";
 
 const AlbumPhotos = () => {
   const { userId = "", albumId = "" } = useParams();
@@ -16,7 +18,7 @@ const AlbumPhotos = () => {
   const user = useUserById(userId);
   const { albums } = useUserAlbums(userId);
   const album = albums.find((a) => a.id === albumId);
-  const photos = useAlbumPhotos(albumId);
+  const { photos, refreshPhotos } = useAlbumPhotos(albumId);
 
   const [editingPhotoId, setEditingPhotoId] = useState<string | null>(null);
   const [photoEdits, setPhotoEdits] = useState<{
@@ -44,15 +46,37 @@ const AlbumPhotos = () => {
     });
   };
 
-  const handleSavePhoto = (photoId: string) => {
-    // TODO: EDIT
-    toast.success("Foto atualizada com sucesso!");
-    setEditingPhotoId(null);
+  const handleSavePhoto = async (photoId: string) => {
+    try {
+      if (!photoEdits.title.trim()) {
+        toast.error("O título da foto não pode estar vazio");
+        return;
+      }
+
+      await updatePhoto({
+        id: photoId,
+        title: photoEdits.title.trim(),
+        description: photoEdits.description.trim(),
+      });
+
+      toast.success("Foto atualizada com sucesso!");
+      setEditingPhotoId(null);
+      refreshPhotos();
+    } catch (error) {
+      toast.error("Falha ao atualizar a foto");
+      console.error("Update error:", error);
+    }
   };
 
-  const handleDeletePhoto = (photoId: string) => {
-    // TODO: DELETE
-    toast.success("Foto deletada com sucesso!");
+  const handleDeletePhoto = async (photoId: string) => {
+    try {
+      await deletePhoto(photoId);
+      toast.success("Foto deletada com sucesso!");
+      refreshPhotos();
+    } catch (error) {
+      toast.error("Falha ao deletar a foto");
+      console.error("Delete error:", error);
+    }
   };
 
   return (

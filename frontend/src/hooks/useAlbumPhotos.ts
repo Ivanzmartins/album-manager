@@ -14,9 +14,14 @@ export function useUserAlbums(userId: string) {
   };
 }
 export function useAlbumPhotos(albumId: string) {
-  const { photos } = useAppData();
+  const { photos, refresh } = useAppData();
 
-  return useMemo(() => {
+  const albumPhotos = useMemo(() => {
     return photos.filter((p) => p.albumId === albumId);
   }, [photos, albumId]);
+
+  return {
+    photos: albumPhotos,
+    refreshPhotos: refresh,
+  };
 }
