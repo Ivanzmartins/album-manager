@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { AlbumCard } from "@/components/AlbumCard";
 import type { User } from "@/types/User";
 import { useUserById } from "@/hooks/useUsers";
-import { useUserAlbums } from "@/hooks/useAlbuns";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { toast } from "react-toastify";
 import { Album } from "@/types/Album";
+import { updatePhoto } from "@/api/editAlbum";
+import { useUserAlbums } from "@/hooks/useAlbumPhotos";
+import { deleteAlbum } from "@/api/deleteAlbum";
 
 interface LocationState {
   user: User;
@@ -22,7 +24,7 @@ const UserAlbums = () => {
 
   const userFromHook = useUserById(userId);
   const user = state?.user ?? userFromHook;
-  const albums = useUserAlbums(userId);
+  const { albums, refreshAlbums } = useUserAlbums(userId);
   const [editingAlbumId, setEditingAlbumId] = useState<string | null>(null);
   const [albumTitle, setAlbumTitle] = useState("");
   const [albumDescription, setAlbumDescription] = useState("");
@@ -46,15 +48,38 @@ const UserAlbums = () => {
     setAlbumDescription(album.description || "");
   };
 
-  const handleSaveAlbum = () => {
-    //TODO: IMPLEMENT ALBUM UPDATE
-    toast.success("Álbum atualizado com sucesso!");
-    setEditingAlbumId(null);
+  const handleSaveAlbum = async () => {
+    if (!editingAlbumId) return;
+
+    try {
+      if (!albumTitle.trim()) {
+        toast.error("O título do álbum não pode estar vazio");
+        return;
+      }
+
+      await updatePhoto({
+        id: editingAlbumId,
+        title: albumTitle.trim(),
+        description: albumDescription.trim(),
+      });
+
+      toast.success("Álbum atualizado com sucesso!");
+      setEditingAlbumId(null);
+      refreshAlbums();
+    } catch (error) {
+      console.error("Failed to update album:", error);
+      toast.error("Falha ao atualizar o álbum");
+    }
   };
 
-  const handleDeleteAlbum = (albumId: string) => {
-    //TODO: IMPLEMENT ALBUM DELETION
-    toast.success("Álbum deletado com sucesso!");
+  const handleDeleteAlbum = async (albumId: string) => {
+    try {
+      await deleteAlbum(albumId);
+      toast.success("Álbum atualizado com sucesso!");
+      refreshAlbums();
+    } catch (error) {
+      toast.error("Falha ao deletar o álbum");
+    }
   };
 
   return (

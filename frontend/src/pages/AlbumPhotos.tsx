@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useAlbumPhotos } from "@/hooks/useAlbumPhotos";
+import { useAlbumPhotos, useUserAlbums } from "@/hooks/useAlbumPhotos";
 import { PhotoCard } from "@/components/PhotoCard";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, FolderOpen, User, Edit, Trash2 } from "lucide-react";
@@ -9,14 +9,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "react-toastify";
 import type { Photo } from "@/types/Photo";
-import { useUserAlbums } from "@/hooks/useAlbuns";
 
 const AlbumPhotos = () => {
   const { userId = "", albumId = "" } = useParams();
   const navigate = useNavigate();
   const user = useUserById(userId);
-  const userAlbuns = useUserAlbums(userId);
-  const album = userAlbuns.find((a) => a.id === albumId);
+  const { albums } = useUserAlbums(userId);
+  const album = albums.find((a) => a.id === albumId);
   const photos = useAlbumPhotos(albumId);
 
   const [editingPhotoId, setEditingPhotoId] = useState<string | null>(null);
