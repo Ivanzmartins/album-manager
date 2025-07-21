@@ -1,111 +1,59 @@
-# Gerenciador de Fotos Familiares
+Full-stack Coding Assignment - Family Photo Management
+Descrição
+Aplicação para gerenciamento básico de fotos de família, onde um membro pode ver fotos em álbuns de outros membros e criar, atualizar e excluir suas próprias fotos e álbuns.
 
-Aplicação fullstack para gerenciamento de fotos familiares, onde membros da família podem visualizar fotos em álbuns de outros membros, além de criar, atualizar e deletar seus próprios álbuns e fotos.
+Como rodar o projeto localmente
+Observação importante
+O projeto não está totalmente dockerizado, então o processo envolve rodar comandos em frontend, backend e Docker separadamente.
 
-## Pré-requisitos
+Passo a passo
+Frontend
 
-- Node.js (versão 18 ou superior)
-- npm (ou yarn)
-- Docker e Docker Compose
-- PostgreSQL (rodando via Docker Compose)
-
-## Instalação e Execução
-
-Siga estes passos para configurar e executar o projeto localmente:
-
-### 1. Backend
-
-1. Navegue até o diretório do backend:
-   ```bash
-   cd backend
-Instale as dependências:
-
-bash
-npm install
-Inicie o servidor de desenvolvimento:
-
-bash
-npm run dev
-Em outro terminal, ainda no diretório backend, inicie o banco de dados com Docker:
-
-bash
-docker-compose up -d
-Execute as migrações do banco de dados:
-
-bash
-npm run migration:run
-2. Frontend
-Abra um novo terminal e navegue até o diretório do frontend:
-
-bash
+arduino
+Copiar
+Editar
 cd frontend
-Instale as dependências:
-
-bash
 npm install
-Inicie o servidor de desenvolvimento:
-
-bash
 npm run dev
-Testes
-Para executar os testes do backend:
+Em outro terminal, ou voltando para a raiz, execute o backend:
 
-Navegue até o diretório do backend (se não estiver nele):
-
-bash
+arduino
+Copiar
+Editar
 cd backend
-Execute os testes:
+npm install
+npm run dev
+Ainda no terminal do backend, rode o Docker Compose para levantar o banco e serviços auxiliares:
 
-bash
+Copiar
+Editar
+docker-compose up -d
+Em outro terminal, dentro da pasta backend, execute as migrations:
+
+arduino
+Copiar
+Editar
+npm run migration:run
+Para rodar os testes do backend:
+
+arduino
+Copiar
+Editar
 npm run test
-Para executar os testes em modo watch (re-executa quando há mudanças):
+Tecnologias usadas
+Frontend: React + TypeScript
 
-bash
-npm run test:watch
-Estrutura do Projeto
-backend/: Contém toda a lógica do servidor e API
+Backend: Node.js + TypeScript
 
-src/: Código fonte TypeScript
+Banco de dados via Docker Compose
 
-tests/: Testes unitários
+API pública: JSONPlaceholder
 
-frontend/: Contém a aplicação React
-
-public/: Arquivos estáticos
-
-src/: Código fonte da aplicação
-
-Rotas da Aplicação
-Frontend: http://localhost:5173 (ou outra porta indicada pelo Vite)
-
-Backend: http://localhost:3000 (ou outra porta indicada pelo Express)
+Testes unitários
 
 Funcionalidades
-Visualizar lista de usuários
+CRUD de fotos e álbuns
 
-Visualizar álbuns de um usuário
+Visualização de fotos e álbuns de outros usuários
 
-Visualizar fotos em um álbum
-
-Criar/editar/deletar álbuns (apenas para o usuário atual)
-
-Criar/editar/deletar fotos (apenas para o usuário atual)
-
-Dependências Principais
-Backend
-Express
-
-TypeORM
-
-PostgreSQL
-
-Jest (para testes)
-
-Frontend
-React
-
-React Router
-
-Tailwind CSS
-
-Radix UI
+Edição exclusiva de fotos e álbuns do usuário logado
