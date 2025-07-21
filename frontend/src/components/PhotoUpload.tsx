@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Plus, Upload } from "lucide-react";
 import { toast } from "react-toastify";
 import { Input } from "./ui/input";
-
 import { Label } from "./ui/label";
 import {
   Select,
@@ -15,44 +14,55 @@ import {
 } from "./ui/select";
 import { useAdminAlbums } from "@/hooks/useAdminAlbuns";
 import { uploadPhoto } from "@/api/uploadPhoto";
+import { fileToBase64 } from "@/lib/imgToBase64";
 
 export const PhotoUpload = () => {
   const [albumId, setAlbumId] = useState("");
   const [newAlbumTitle, setNewAlbumTitle] = useState("");
   const [isCreatingNewAlbum, setIsCreatingNewAlbum] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const albums = useAdminAlbums();
 
   const handleFileSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      if (!file.type.startsWith("image/")) {
+        toast.error("Por favor, selecione um arquivo de imagem");
+        return;
+      }
       setSelectedFile(file);
     }
   };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    if (!selectedFile) {
-      toast.error("Nenhum arquivo selecionado");
-      return;
-    }
-
-    if (!isCreatingNewAlbum && !albumId) {
-      toast.error("Selecione um aĺbum para a foto");
-      return;
-    }
-
-    if (isCreatingNewAlbum && !newAlbumTitle) {
-      toast.error("Selecione um álbum existente ou crie um novo");
-      return;
-    }
+    setIsUploading(true);
 
     try {
+      if (!selectedFile) {
+        toast.error("Nenhum arquivo selecionado");
+        return;
+      }
+
+      if (!isCreatingNewAlbum && !albumId) {
+        toast.error("Selecione um álbum para a foto");
+        return;
+      }
+
+      if (isCreatingNewAlbum && !newAlbumTitle.trim()) {
+        toast.error("Digite um título para o novo álbum");
+        return;
+      }
+
+      const base64 = await fileToBase64(selectedFile);
+
       await uploadPhoto({
-        file: selectedFile,
-        albumId: isCreatingNewAlbum ? undefined : albumId,
-        newAlbumTitle: isCreatingNewAlbum ? newAlbumTitle : undefined,
+        base64,
+        userId: 1,
+        albumId: isCreatingNewAlbum ? undefined : Number(albumId),
+        newAlbumTitle: isCreatingNewAlbum ? newAlbumTitle.trim() : undefined,
       });
 
       toast.success("Foto enviada com sucesso!");
@@ -62,10 +72,13 @@ export const PhotoUpload = () => {
       setIsCreatingNewAlbum(false);
       setSelectedFile(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
-    } catch (err) {
+    } catch (error) {
       toast.error("Erro ao enviar a foto");
+    } finally {
+      setIsUploading(false);
     }
   };
+
   return (
     <Card className="max-w-2xl mx-auto bg-photo-card border-photo-border">
       <CardHeader>
@@ -76,20 +89,24 @@ export const PhotoUpload = () => {
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="hover:pointer">
+          <div>
             <Label>Arquivo:</Label>
             <Input
               ref={fileInputRef}
               type="file"
               onChange={handleFileSelect}
               className="mt-1"
+              accept="image/*"
+              disabled={isUploading}
             />
             {selectedFile && (
               <p className="text-sm text-muted-foreground mt-1">
-                Selecionado: {selectedFile.name}
+                Selecionado: {selectedFile.name} (
+                {(selectedFile.size / 1024).toFixed(2)} KB)
               </p>
             )}
           </div>
+
           <div>
             <div className="flex items-center justify-between mb-2">
               <Label>Álbum</Label>
@@ -99,6 +116,7 @@ export const PhotoUpload = () => {
                 size="sm"
                 onClick={() => setIsCreatingNewAlbum(!isCreatingNewAlbum)}
                 className="flex items-center space-x-1"
+                disabled={isUploading}
               >
                 <Plus className="h-3 w-3" />
                 <span>
@@ -106,21 +124,27 @@ export const PhotoUpload = () => {
                 </span>
               </Button>
             </div>
+
             {isCreatingNewAlbum ? (
               <Input
                 type="text"
                 value={newAlbumTitle}
                 onChange={(e) => setNewAlbumTitle(e.target.value)}
                 placeholder="Digite um título"
+                disabled={isUploading}
               />
             ) : (
-              <Select value={albumId} onValueChange={setAlbumId}>
+              <Select
+                value={albumId}
+                onValueChange={setAlbumId}
+                disabled={isUploading}
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecione um álbum" />
                 </SelectTrigger>
                 <SelectContent>
                   {albums.map((album) => (
-                    <SelectItem key={album.id} value={album.id}>
+                    <SelectItem key={album.id} value={album.id.toString()}>
                       {album.title}
                     </SelectItem>
                   ))}
@@ -129,8 +153,12 @@ export const PhotoUpload = () => {
             )}
           </div>
 
-          <Button type="submit" className="w-full">
-            Upload Foto
+          <Button
+            type="submit"
+            className="w-full"
+            disabled={isUploading || !selectedFile}
+          >
+            {isUploading ? "Enviando..." : "Upload Foto"}
           </Button>
         </form>
       </CardContent>

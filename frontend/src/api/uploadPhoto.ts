@@ -1,29 +1,26 @@
-import axios from "axios";
+import { api } from "@/api/api";
 
 export async function uploadPhoto({
-  file,
+  base64,
+  userId,
   albumId,
   newAlbumTitle,
 }: {
-  file: File;
-  albumId?: string;
+  base64: string;
+  userId: number;
+  albumId: number;
   newAlbumTitle?: string;
-}): Promise<void> {
-  let finalAlbumId = albumId;
-
-  if (!albumId && newAlbumTitle) {
-    const res = await axios.post("/api/albums", {
-      title: newAlbumTitle,
-      userId: "1",
+}) {
+  try {
+    const response = await api.post("/photos", {
+      base64,
+      userId,
+      albumId,
+      newAlbumTitle,
     });
-    finalAlbumId = res.data.id;
+    return response.data;
+  } catch (error) {
+    console.error("Upload failed:", error);
+    throw error;
   }
-
-  const formData = new FormData();
-  formData.append("photo", file);
-  formData.append("albumId", finalAlbumId!);
-
-  await axios.post("/api/photos", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
 }

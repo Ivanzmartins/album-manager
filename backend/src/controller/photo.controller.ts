@@ -6,26 +6,31 @@ export class PhotoController {
     try {
       const photos = await PhotoService.getAllPhotos();
       res.json(photos);
-    } catch (error: unknown) {
-      console.log(error);
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+    } catch (error: any) {
+      console.error(error);
+      res.status(500).json({ error: error.message });
     }
   }
+
   static async createPhoto(req: Request, res: Response) {
     try {
       const photo = await PhotoService.createPhoto(req.body);
       res.status(201).json(photo);
-    } catch (error: unknown) {
-      console.log(error);
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+    } catch (error: any) {
+      console.error(error);
+      res.status(400).json({ error: error.message });
+    }
+  }
+
+  static async updatePhoto(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const { title, description } = req.body;
+      await PhotoService.updatePhoto({ id: Number(id), title, description });
+      res.status(200).json({ message: "ok" });
+    } catch (error: any) {
+      console.error(error);
+      res.status(500).json({ error: error.message });
     }
   }
 
@@ -33,27 +38,9 @@ export class PhotoController {
     try {
       await PhotoService.deletePhoto(Number(req.params.id));
       res.status(200).json({ message: "ok" });
-    } catch (error: unknown) {
-      console.log(error);
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
-    }
-  }
-  static async updatePhoto(req: Request, res: Response) {
-    try {
-      const { id } = req.params;
-      const { title, description } = req.body;
-      await PhotoService.updatePhoto({ id: Number(id), title, description });
-      res.status(200).json({ message: "ok" });
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        res.status(500).json({ error: error.message });
-      } else {
-        res.status(500).json({ error: "An unknown error occurred" });
-      }
+    } catch (error: any) {
+      console.error(error);
+      res.status(500).json({ error: error.message });
     }
   }
 }
