@@ -1,16 +1,19 @@
-Este é um projeto fullstack para gerenciamento de álbuns de fotos familiares, desenvolvido com React (frontend) e Node.js (backend), ambos utilizando TypeScript.
+# Gerenciador de Fotos Familiares
+
+Aplicação fullstack para gerenciamento de fotos familiares, onde membros da família podem visualizar fotos em álbuns de outros membros, além de criar, atualizar e deletar seus próprios álbuns e fotos.
 
 ## Pré-requisitos
 
-- Node.js (versão 16 ou superior)
-- npm ou yarn
-- Docker e Docker Compose (para o banco de dados)
+- Node.js (versão 18 ou superior)
+- npm (ou yarn)
+- Docker e Docker Compose
+- PostgreSQL (rodando via Docker Compose)
 
 ## Instalação e Execução
 
 Siga estes passos para configurar e executar o projeto localmente:
 
-### 1. Configurar o backend
+### 1. Backend
 
 1. Navegue até o diretório do backend:
    ```bash
@@ -23,7 +26,7 @@ Inicie o servidor de desenvolvimento:
 
 bash
 npm run dev
-Em outro terminal (ainda no diretório backend), inicie o banco de dados com Docker:
+Em outro terminal, ainda no diretório backend, inicie o banco de dados com Docker:
 
 bash
 docker-compose up -d
@@ -31,11 +34,7 @@ Execute as migrações do banco de dados:
 
 bash
 npm run migration:run
-(Opcional) Execute os testes do backend:
-
-bash
-npm run test
-2. Configurar o frontend
+2. Frontend
 Abra um novo terminal e navegue até o diretório do frontend:
 
 bash
@@ -48,32 +47,65 @@ Inicie o servidor de desenvolvimento:
 
 bash
 npm run dev
-Acessando a aplicação
-Frontend: http://localhost:3000
-
-Backend: http://localhost:4000
-
-Estrutura do Projeto
-.
-├── backend/               # Backend da aplicação (Node.js + TypeScript)
-│   ├── src/               # Código fonte do backend
-│   ├── tests/             # Testes do backend
-│   ├── docker-compose.yml # Configuração do Docker para o banco de dados
-│   └── ...                # Outros arquivos de configuração
-├── frontend/              # Frontend da aplicação (React + TypeScript)
-│   ├── src/               # Código fonte do frontend
-│   ├── public/            # Arquivos públicos
-│   └── ...                # Outros arquivos de configuração
-└── README.md              # Este arquivo
-
-Funcionalidades Implementadas
-Visualização de usuários, álbuns e fotos
-
-CRUD para fotos e álbuns do usuário atual
-
 Testes
-O projeto inclui testes unitários para o backend. Para executá-los:
+Para executar os testes do backend:
+
+Navegue até o diretório do backend (se não estiver nele):
 
 bash
 cd backend
+Execute os testes:
+
+bash
 npm run test
+Para executar os testes em modo watch (re-executa quando há mudanças):
+
+bash
+npm run test:watch
+Estrutura do Projeto
+backend/: Contém toda a lógica do servidor e API
+
+src/: Código fonte TypeScript
+
+tests/: Testes unitários
+
+frontend/: Contém a aplicação React
+
+public/: Arquivos estáticos
+
+src/: Código fonte da aplicação
+
+Rotas da Aplicação
+Frontend: http://localhost:5173 (ou outra porta indicada pelo Vite)
+
+Backend: http://localhost:3000 (ou outra porta indicada pelo Express)
+
+Funcionalidades
+Visualizar lista de usuários
+
+Visualizar álbuns de um usuário
+
+Visualizar fotos em um álbum
+
+Criar/editar/deletar álbuns (apenas para o usuário atual)
+
+Criar/editar/deletar fotos (apenas para o usuário atual)
+
+Dependências Principais
+Backend
+Express
+
+TypeORM
+
+PostgreSQL
+
+Jest (para testes)
+
+Frontend
+React
+
+React Router
+
+Tailwind CSS
+
+Radix UI
