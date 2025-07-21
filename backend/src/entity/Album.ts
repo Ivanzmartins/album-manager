@@ -21,7 +21,7 @@ export class Album {
   description?: string;
 
   @Column({ name: "userId" })
-  userId: string;
+  userId: number;
 
   @Column({ type: "date" })
   createdAt: Date;

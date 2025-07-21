@@ -24,7 +24,7 @@ export class PhotoService {
     const album = albumRepository.create({
       title,
       description: "",
-      userId: String(userId),
+      userId: userId,
       createdAt: now,
       updatedAt: now,
     });
