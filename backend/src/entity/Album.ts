@@ -15,10 +15,10 @@ export class Album {
   id: number;
 
   @Column()
-  title: string;
+  title?: string;
 
   @Column()
-  description: string;
+  description?: string;
 
   @Column({ name: "userId" })
   userId: string;

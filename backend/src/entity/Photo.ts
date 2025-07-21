@@ -13,10 +13,10 @@ export class Photo {
   id: number;
 
   @Column()
-  title: string;
+  title?: string;
 
   @Column()
-  description: string;
+  description?: string;
 
   @Column()
   base64: string;

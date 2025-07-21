@@ -16,8 +16,8 @@ export class InitMigration1753055795100 implements MigrationInterface {
     await queryRunner.query(`
       CREATE TABLE "album" (
         "id" SERIAL,
-        "title" character varying NOT NULL,
-        "description" character varying NOT NULL,
+        "title" character varying  NULL,
+        "description" character varying  NULL,
         "userId" integer,
         "createdAt" date NOT NULL,
         "updatedAt" date NOT NULL,
@@ -28,8 +28,8 @@ export class InitMigration1753055795100 implements MigrationInterface {
     await queryRunner.query(`
       CREATE TABLE "photo" (
         "id" SERIAL,
-        "title" character varying NOT NULL,
-        "description" character varying NOT NULL,
+        "title" character varying  NULL,
+        "description" character varying  NULL,
         "base64" character varying NOT NULL,
         "uploadedAt" date NOT NULL,
         "albumId" integer,

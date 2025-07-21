@@ -3,5 +3,5 @@ import { Album } from "@/types/Album";
 
 export function useAdminAlbums(): Album[] {
   const { albums } = useAppData();
-  return albums.filter((album) => album.userId === "1");
+  return albums.filter((album) => album.userId === 1);
 }
