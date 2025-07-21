@@ -29,7 +29,11 @@
      ```bash
      npm run migration:run
      ```
-
+5. **Testes**  
+   - Abra um novo terminal, vá para `/backend` e execute:  
+     ```bash
+     npm run test
+     ```
 ---
 
 O projeto não está totalmente dockerizado, por isso é necessário rodar frontend e backend manualmente fora do Docker.
