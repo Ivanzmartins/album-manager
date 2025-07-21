@@ -1,7 +1,7 @@
 import { api } from "@/api/api";
 import { toast } from "react-toastify";
 
-export async function deleteAlbum(id: string) {
+export async function deleteAlbum(id: number) {
   try {
     await api.delete(`/albums/${id}`);
     return true;

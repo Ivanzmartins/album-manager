@@ -15,12 +15,12 @@ import { updatePhoto } from "@/api/updatePhoto";
 const AlbumPhotos = () => {
   const { userId = "", albumId = "" } = useParams();
   const navigate = useNavigate();
-  const user = useUserById(userId);
-  const { albums } = useUserAlbums(userId);
-  const album = albums.find((a) => a.id === albumId);
-  const { photos, refreshPhotos } = useAlbumPhotos(albumId);
+  const user = useUserById(Number(userId));
+  const { albums } = useUserAlbums(Number(userId));
+  const album = albums.find((a) => a.id === Number(albumId));
+  const { photos, refreshPhotos } = useAlbumPhotos(Number(albumId));
 
-  const [editingPhotoId, setEditingPhotoId] = useState<string | null>(null);
+  const [editingPhotoId, setEditingPhotoId] = useState<number | null>(null);
   const [photoEdits, setPhotoEdits] = useState<{
     title: string;
     description: string;
@@ -46,7 +46,7 @@ const AlbumPhotos = () => {
     });
   };
 
-  const handleSavePhoto = async (photoId: string) => {
+  const handleSavePhoto = async (photoId: number) => {
     try {
       if (!photoEdits.title.trim()) {
         toast.error("O título da foto não pode estar vazio");
@@ -68,7 +68,7 @@ const AlbumPhotos = () => {
     }
   };
 
-  const handleDeletePhoto = async (photoId: string) => {
+  const handleDeletePhoto = async (photoId: number) => {
     try {
       await deletePhoto(photoId);
       toast.success("Foto deletada com sucesso!");

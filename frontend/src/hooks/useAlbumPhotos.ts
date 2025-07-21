@@ -1,7 +1,7 @@
 import { useAppData } from "./useAppData";
 import { useMemo } from "react";
 
-export function useUserAlbums(userId: string) {
+export function useUserAlbums(userId: number) {
   const { albums, refresh } = useAppData();
 
   const userAlbums = useMemo(() => {
@@ -13,7 +13,7 @@ export function useUserAlbums(userId: string) {
     refreshAlbums: refresh,
   };
 }
-export function useAlbumPhotos(albumId: string) {
+export function useAlbumPhotos(albumId: number) {
   const { photos, refresh } = useAppData();
 
   const albumPhotos = useMemo(() => {

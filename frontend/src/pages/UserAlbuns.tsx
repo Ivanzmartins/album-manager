@@ -22,10 +22,10 @@ const UserAlbums = () => {
   const location = useLocation();
   const state = location.state as LocationState | undefined;
 
-  const userFromHook = useUserById(userId);
+  const userFromHook = useUserById(Number(userId));
   const user = state?.user ?? userFromHook;
-  const { albums, refreshAlbums } = useUserAlbums(userId);
-  const [editingAlbumId, setEditingAlbumId] = useState<string | null>(null);
+  const { albums, refreshAlbums } = useUserAlbums(Number(userId));
+  const [editingAlbumId, setEditingAlbumId] = useState<number | null>(null);
   const [albumTitle, setAlbumTitle] = useState("");
   const [albumDescription, setAlbumDescription] = useState("");
 
@@ -72,7 +72,7 @@ const UserAlbums = () => {
     }
   };
 
-  const handleDeleteAlbum = async (albumId: string) => {
+  const handleDeleteAlbum = async (albumId: number) => {
     try {
       await deleteAlbum(albumId);
       toast.success("Álbum atualizado com sucesso!");
