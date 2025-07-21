@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-// import { mockAlbums } from "@/data/mockAlbuns";
-import { mockPhotos } from "@/data/mockPhotos";
 import type { User } from "@/types/User";
 import type { Album } from "@/types/Album";
 import type { Photo } from "@/types/Photo";
@@ -12,20 +10,15 @@ export function useAppData() {
   const [photos, setPhotos] = useState<Photo[]>([]);
 
   useEffect(() => {
-    // Mock version
-    setPhotos(mockPhotos);
-
-    // TODO:
     Promise.all([
       api.get("/users"),
       api.get("/albums"),
-      // api.get("/photos")
-    ]).then(([u, a]) => {
+      api.get("/photos"),
+    ]).then(([u, a, p]) => {
       setUsers(u.data);
       setAlbums(a.data);
-      // setPhotos(p.data);
+      setPhotos(p.data);
     });
   }, []);
-  console.log(albums);
   return { users, albums, photos };
 }

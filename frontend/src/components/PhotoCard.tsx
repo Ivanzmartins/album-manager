@@ -10,7 +10,7 @@ export const PhotoCard = ({ photo }: PhotoCardProps) => {
     <Card className="overflow-hidden transition-all duration-200 hover:shadow-hover hover:scale-105 bg-photo-card border-photo-border">
       <div className="aspect-square relative overflow-hidden">
         <img
-          src={photo.url}
+          src={photo.base64}
           alt={photo.title}
           className="w-full h-full object-cover transition-transform duration-200 hover:scale-110"
         />

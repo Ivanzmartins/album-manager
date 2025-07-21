@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
-import { mockPhotos } from "@/data/mockPhotos";
+import { useAppData } from "./useAppData";
+import { useMemo } from "react";
 import type { Photo } from "@/types/Photo";
 
 export function useAlbumPhotos(albumId: string) {
-  const [photos, setPhotos] = useState<Photo[]>([]);
+  const { photos } = useAppData();
 
-  useEffect(() => {
-    const filtered = mockPhotos.filter((p) => p.albumId === albumId);
-    setPhotos(filtered);
-    // TODO: axios.get(`/api/albums/${albumId}/photos`).then(...)
-  }, [albumId]);
-
-  return photos;
+  return useMemo(() => {
+    return photos.filter((p) => p.albumId === albumId);
+  }, [photos, albumId]);
 }

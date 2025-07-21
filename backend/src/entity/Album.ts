@@ -1,4 +1,11 @@
-import { Entity, PrimaryColumn, Column, ManyToOne, OneToMany } from "typeorm";
+import {
+  Entity,
+  PrimaryColumn,
+  Column,
+  ManyToOne,
+  OneToMany,
+  JoinColumn,
+} from "typeorm";
 import { User } from "./User";
 import { Photo } from "./Photo";
 
@@ -13,7 +20,7 @@ export class Album {
   @Column()
   description: string;
 
-  @Column()
+  @Column({ name: "userId" })
   userId: string;
 
   @Column({ type: "date" })
@@ -23,6 +30,7 @@ export class Album {
   updatedAt: Date;
 
   @ManyToOne(() => User, (user) => user.albums)
+  @JoinColumn({ name: "userId" })
   user: User;
 
   @OneToMany(() => Photo, (photo) => photo.album)

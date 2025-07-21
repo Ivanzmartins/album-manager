@@ -1,5 +1,4 @@
-import { Entity, PrimaryColumn, Column, ManyToOne } from "typeorm";
-import { User } from "./User";
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { Album } from "./Album";
 
 @Entity()
@@ -19,11 +18,10 @@ export class Photo {
   @Column({ type: "date" })
   uploadedAt: Date;
 
-  @ManyToOne(() => User, (user) => user.photos)
-  user: User;
+  @Column({ name: "albumId" })
+  albumId: string;
 
-  @ManyToOne(() => Album, (album) => album.photos, {
-    onDelete: "CASCADE",
-  })
+  @ManyToOne(() => Album, (album) => album.photos)
+  @JoinColumn({ name: "albumId" })
   album: Album;
 }
