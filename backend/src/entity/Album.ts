@@ -13,11 +13,11 @@ export class Album {
   @Column()
   description: string;
 
-  @Column({ nullable: true })
-  coverPhoto: string;
-
   @Column({ type: "date" })
   createdAt: Date;
+
+  @Column({ type: "date" })
+  updatedAt: Date;
 
   @ManyToOne(() => User, (user) => user.albums)
   user: User;
