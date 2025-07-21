@@ -43,15 +43,12 @@ export class PhotoController {
     }
   }
   static async updatePhoto(req: Request, res: Response) {
-    console.log("iniciando atualização");
     try {
       const { id } = req.params;
       const { title, description } = req.body;
       await PhotoService.updatePhoto({ id, title, description });
-      console.log("termiando atualização");
       res.status(200).json({ message: "ok" });
     } catch (error: unknown) {
-      console.log(error);
       if (error instanceof Error) {
         res.status(500).json({ error: error.message });
       } else {

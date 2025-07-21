@@ -14,4 +14,32 @@ export class AlbumController {
       }
     }
   }
+
+  static async delete(req: Request, res: Response) {
+    try {
+      await AlbumService.delete(req.params.id);
+      res.status(200).json({ message: "ok" });
+    } catch (error: unknown) {
+      console.log(error);
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
+    }
+  }
+  static async update(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const { title, description } = req.body;
+      await AlbumService.update({ id, title, description });
+      res.status(200).json({ message: "ok" });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
+    }
+  }
 }

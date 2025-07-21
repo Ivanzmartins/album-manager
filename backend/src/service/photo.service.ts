@@ -52,8 +52,15 @@ export class PhotoService {
     const photo = await photoRepository.findOneBy({ id });
 
     if (!photo) throw new Error("Photo not found");
+    const updates: Partial<Photo> = {};
+    if (title !== undefined && title !== "") {
+      updates.title = title;
+    }
 
-    Object.assign(photo, { title, description });
+    if (description !== undefined && description !== "") {
+      updates.description = description;
+    }
+    Object.assign(photo, updates);
     return await photoRepository.save(photo);
   }
 
