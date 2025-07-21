@@ -31,7 +31,7 @@ export class PhotoController {
 
   static async deletePhoto(req: Request, res: Response) {
     try {
-      await PhotoService.deletePhoto(req.params.id);
+      await PhotoService.deletePhoto(Number(req.params.id));
       res.status(200).json({ message: "ok" });
     } catch (error: unknown) {
       console.log(error);
@@ -46,7 +46,7 @@ export class PhotoController {
     try {
       const { id } = req.params;
       const { title, description } = req.body;
-      await PhotoService.updatePhoto({ id, title, description });
+      await PhotoService.updatePhoto({ id: Number(id), title, description });
       res.status(200).json({ message: "ok" });
     } catch (error: unknown) {
       if (error instanceof Error) {

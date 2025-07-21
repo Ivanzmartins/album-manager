@@ -1,18 +1,18 @@
 import {
   Entity,
-  PrimaryColumn,
   Column,
   ManyToOne,
   OneToMany,
   JoinColumn,
+  PrimaryGeneratedColumn,
 } from "typeorm";
 import { User } from "./User";
 import { Photo } from "./Photo";
 
 @Entity()
 export class Album {
-  @PrimaryColumn()
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column()
   title: string;

@@ -1,8 +1,8 @@
 export interface Photo {
-  id: string;
+  id: number;
   title: string;
   description?: string;
   base64: string;
-  albumId: string;
-  userId: string;
+  albumId: number;
+  userId: number;
 }

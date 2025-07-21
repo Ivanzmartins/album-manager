@@ -17,7 +17,7 @@ export class AlbumController {
 
   static async delete(req: Request, res: Response) {
     try {
-      await AlbumService.delete(req.params.id);
+      await AlbumService.delete(Number(req.params.id));
       res.status(200).json({ message: "ok" });
     } catch (error: unknown) {
       console.log(error);
@@ -32,7 +32,7 @@ export class AlbumController {
     try {
       const { id } = req.params;
       const { title, description } = req.body;
-      await AlbumService.update({ id, title, description });
+      await AlbumService.update({ id: Number(id), title, description });
       res.status(200).json({ message: "ok" });
     } catch (error: unknown) {
       if (error instanceof Error) {

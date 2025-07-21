@@ -1,6 +1,6 @@
 export interface Album {
-  id: string;
+  id: number;
   title: string;
   description?: string;
-  userId: string;
+  userId: number;
 }

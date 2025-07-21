@@ -12,7 +12,7 @@ export class AlbumService {
     title,
     description,
   }: {
-    id: string;
+    id: number;
     title?: string;
     description?: string;
   }) {
@@ -34,7 +34,7 @@ export class AlbumService {
     return await albumRepository.save(album);
   }
 
-  static async delete(id: string) {
+  static async delete(id: number) {
     const albumRepository = AppDataSource.getRepository(Album);
 
     const album = await albumRepository.findOneBy({ id });

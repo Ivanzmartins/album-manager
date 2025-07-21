@@ -4,16 +4,16 @@ export function useUsers() {
   return useAppData().users;
 }
 
-export function useUserById(userId?: string) {
+export function useUserById(userId?: number) {
   const users = useAppData().users;
   return users.find((u) => u.id === userId);
 }
 export const useCurrentUser = () => {
   const { users } = useAppData();
-  return users.find((u) => u.id === "1");
+  return users.find((u) => u.id === 1);
 };
 
 export const useOtherUsers = () => {
   const { users } = useAppData();
-  return users.filter((u) => u.id !== "1");
+  return users.filter((u) => u.id !== 1);
 };

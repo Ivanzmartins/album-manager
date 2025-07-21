@@ -12,27 +12,26 @@ export class PhotoService {
     title: string;
     description: string;
     base64: string;
-    uploadedAt: Date;
-    userId: string;
-    albumId: string;
+    userId: number;
+    albumId: number;
   }) {
     const photoRepository = AppDataSource.getRepository(Photo);
     const albumRepository = AppDataSource.getRepository(Album);
 
     const album = await albumRepository.findOne({
       where: { id: data.albumId },
-      relations: ["user"],
     });
 
     if (!album) throw new Error("Album not found");
-    if (album.user.id !== data.userId)
-      throw new Error("Album doesn't belong to user");
+    console.log({ album, userId: data.userId });
+    // if (album.user.id !== data.userId)
+    //   throw new Error("Album doesn't belong to user");
 
     const photo = photoRepository.create({
       title: data.title,
       description: data.description,
       base64: data.base64,
-      uploadedAt: new Date(data.uploadedAt),
+      uploadedAt: new Date(),
       album: album,
     });
 
@@ -44,7 +43,7 @@ export class PhotoService {
     title,
     description,
   }: {
-    id: string;
+    id: number;
     title: string;
     description: string;
   }) {
@@ -64,7 +63,7 @@ export class PhotoService {
     return await photoRepository.save(photo);
   }
 
-  static async deletePhoto(id: string) {
+  static async deletePhoto(id: number) {
     const photoRepository = AppDataSource.getRepository(Photo);
 
     const photo = await photoRepository.findOneBy({ id });
