@@ -13,6 +13,9 @@ export class Album {
   @Column()
   description: string;
 
+  @Column()
+  userId: string;
+
   @Column({ type: "date" })
   createdAt: Date;
 
