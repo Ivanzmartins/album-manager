@@ -5,9 +5,7 @@ import { Photo } from "../entity/Photo";
 export class PhotoService {
   static async getAllPhotos() {
     const photoRepository = AppDataSource.getRepository(Photo);
-    return await photoRepository.find({
-      relations: ["album", "album.user"],
-    });
+    return await photoRepository.find();
   }
 
   static async createPhoto(data: {
@@ -41,13 +39,32 @@ export class PhotoService {
     return await photoRepository.save(photo);
   }
 
-  static async updatePhoto(id: string, updateData: Partial<Photo>) {
+  static async updatePhoto({
+    id,
+    title,
+    description,
+  }: {
+    id: string;
+    title: string;
+    description: string;
+  }) {
     const photoRepository = AppDataSource.getRepository(Photo);
     const photo = await photoRepository.findOneBy({ id });
 
     if (!photo) throw new Error("Photo not found");
 
-    Object.assign(photo, updateData);
+    Object.assign(photo, { title, description });
     return await photoRepository.save(photo);
+  }
+
+  static async deletePhoto(id: string) {
+    const photoRepository = AppDataSource.getRepository(Photo);
+
+    const photo = await photoRepository.findOneBy({ id });
+    if (!photo) {
+      throw new Error("Photo not found");
+    }
+
+    return photoRepository.delete({ id });
   }
 }
