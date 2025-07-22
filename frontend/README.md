@@ -1,19 +1,19 @@
-# Gerenciador de Fotos Familiares
+# Family Photo manager
 
-Aplicação fullstack para gerenciamento de fotos familiares com React (Frontend) e Node.js (Backend).
+Frontend application for managing family photos with react
 
-## 🚀 Como executar
+## 🚀 How to run:
 
-### Pré-requisitos
+### Requirements
 
 - Node.js 18+
-- Docker e Docker Compose
+- Docker and Docker Compose
 - npm ou yarn
 
-### 🔧 Configuração
-
-1. Clone o repositório
+### 🔧 How to start:
 
 ```bash
-git clone [URL_DO_REPOSITORIO]
+cd frontend
+npm install
+npm run dev
 ```

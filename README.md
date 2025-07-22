@@ -1,50 +1,53 @@
-# Gerenciador de Fotos Familiares
+# Family Photo manager
 
 Aplicação fullstack para gerenciamento de fotos familiares com React (Frontend) e Node.js (Backend).
+Fullstack application for family photos with React (Frontend) and Node.js (Backend).
 
-## 🚀 Como executar
+## 🚀 How to run:
 
-### Pré-requisitos
+### Requirements
 
 - Node.js 18+
-- Docker e Docker Compose
+- Docker and Docker Compose
 - npm
 
-### 🔧 Configuração
+### 🔧 Configuration
 
-1. Clone o repositório
+1. Clone the repository
 
 ```bash
 git clone git@github.com:Ivanzmartins/album-manager.git
 ```
+
 2. Backend
- ```bash
-  cd backend
-  npm install
-  npm run dev
+
+```bash
+cd backend
+docker-compose up -d
+npm run migration:run
+npm install
+npm run dev
 ```
 
-Em outro terminal (ainda no diretório backend):
+🧪 Testing
+
 ```bash
-  docker-compose up -d
-  npm run migration:run
+cd backend
+npm run test
 ```
 
 3. Frontend
+
 ```bash
   cd ../frontend
   npm install
   npm run dev
 ```
 
-4.🧪 Testes
-```bash
-cd backend
-npm run test
-```
 5.🌐 Endpoints
-* Frontend: http://localhost:5173
-* Backend: http://localhost:3000
+
+- Frontend: http://localhost:5173
+- Backend: http://localhost:`<defined in .env PORT >`
 
 ## Tecnologias Utilizadas
 
@@ -58,4 +61,3 @@ npm run test
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width="40" />
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" width="40" />
 </div>
-
