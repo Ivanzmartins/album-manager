@@ -1,6 +1,5 @@
 # Family Photo manager
 
-Aplicação fullstack para gerenciamento de fotos familiares com React (Frontend) e Node.js (Backend).
 Fullstack application for family photos with React (Frontend) and Node.js (Backend).
 
 ## 🚀 How to run:
