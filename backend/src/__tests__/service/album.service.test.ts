@@ -27,18 +27,18 @@ describe("AlbumService", () => {
     mockAlbumRepo.findOneBy.mockResolvedValue({ ...mockAlbum });
     mockAlbumRepo.save.mockResolvedValue({
       ...mockAlbum,
-      title: "Novo título",
-      description: "Nova descrição",
+      title: "New title",
+      description: "New description",
     });
 
     const result = await AlbumService.update({
       id: 1,
-      title: "Novo título",
-      description: "Nova descrição",
+      title: "New title",
+      description: "New description",
     });
 
-    expect(result.title).toBe("Novo título");
-    expect(result.description).toBe("Nova descrição");
+    expect(result.title).toBe("New title");
+    expect(result.description).toBe("New description");
   });
 
   test("update album not found", async () => {

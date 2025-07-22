@@ -35,7 +35,7 @@ const UserAlbums = () => {
     return (
       <div className="min-h-screen flex justify-center items-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold">Usuário não encontrado</h1>
+          <h1 className="text-2xl font-bold">User not found</h1>
           <Button onClick={() => navigate("/")}>Voltar</Button>
         </div>
       </div>
@@ -53,7 +53,7 @@ const UserAlbums = () => {
 
     try {
       if (!albumTitle.trim()) {
-        toast.error("O título do álbum não pode estar vazio");
+        toast.error("Album title can't be empty");
         return;
       }
 
@@ -63,23 +63,23 @@ const UserAlbums = () => {
         description: albumDescription.trim(),
       });
 
-      toast.success("Álbum atualizado com sucesso!");
+      toast.success("Album updated successfully!");
       setEditingAlbumId(null);
       refreshAlbums();
     } catch (error) {
       console.error("Failed to update album:", error);
-      toast.error("Falha ao atualizar o álbum");
+      toast.error("Failed to update album");
     }
   };
 
   const handleDeleteAlbum = async (albumId: number) => {
     try {
       await deleteAlbum(albumId);
-      toast.success("Álbum atualizado com sucesso!");
+      toast.success("Album deleted!");
       refreshAlbums();
     } catch (error) {
       console.error(error);
-      toast.error("Falha ao deletar o álbum");
+      toast.error("Failed to delete album");
     }
   };
 
@@ -169,9 +169,7 @@ const UserAlbums = () => {
             ))}
           </div>
         ) : (
-          <p className="text-center text-muted-foreground">
-            Nenhum álbum encontrado.
-          </p>
+          <p className="text-center text-muted-foreground">No album found.</p>
         )}
       </div>
     </div>

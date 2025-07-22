@@ -1,7 +1,7 @@
 export const mockAlbum = {
   id: 1,
   title: "Album 1",
-  description: "Descrição",
+  description: "Description",
   userId: 123,
   createdAt: new Date(),
   updatedAt: new Date(),
@@ -12,7 +12,7 @@ export const mockAlbum = {
 export const mockPhoto = {
   id: 1,
   title: "Photo 1",
-  description: "Descrição",
+  description: "Description",
   base64: "base64string",
   uploadedAt: new Date(),
   albumId: "1",

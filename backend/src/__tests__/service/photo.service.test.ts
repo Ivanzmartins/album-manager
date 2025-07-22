@@ -77,7 +77,7 @@ describe("PhotoService", () => {
     const result = await PhotoService.createPhoto({
       base64: "base64string",
       userId: 123,
-      newAlbumTitle: "Novo álbum",
+      newAlbumTitle: "New album",
     });
 
     expect(result).toEqual(mockPhoto);
@@ -85,15 +85,15 @@ describe("PhotoService", () => {
 
   test("updatePhoto success", async () => {
     mockPhotoRepo.findOneBy.mockResolvedValue({ ...mockPhoto });
-    mockPhotoRepo.save.mockResolvedValue({ ...mockPhoto, title: "Atualizado" });
+    mockPhotoRepo.save.mockResolvedValue({ ...mockPhoto, title: "Updated" });
 
     const result = await PhotoService.updatePhoto({
       id: 1,
-      title: "Atualizado",
+      title: "Updated",
       description: "",
     });
 
-    expect(result.title).toBe("Atualizado");
+    expect(result.title).toBe("Updated");
   });
 
   test("updatePhoto not found", async () => {
