@@ -78,6 +78,7 @@ const UserAlbums = () => {
       toast.success("Álbum atualizado com sucesso!");
       refreshAlbums();
     } catch (error) {
+      console.error(error);
       toast.error("Falha ao deletar o álbum");
     }
   };

@@ -4,11 +4,15 @@ import { PhotoService } from "../service/photo.service";
 export class PhotoController {
   static async getAllPhotos(req: Request, res: Response) {
     try {
+      const t = 10;
       const photos = await PhotoService.getAllPhotos();
       res.json(photos);
-    } catch (error: any) {
-      console.error(error);
-      res.status(500).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
     }
   }
 
@@ -16,9 +20,12 @@ export class PhotoController {
     try {
       const photo = await PhotoService.createPhoto(req.body);
       res.status(201).json(photo);
-    } catch (error: any) {
-      console.error(error);
-      res.status(400).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
     }
   }
 
@@ -28,9 +35,12 @@ export class PhotoController {
       const { title, description } = req.body;
       await PhotoService.updatePhoto({ id: Number(id), title, description });
       res.status(200).json({ message: "ok" });
-    } catch (error: any) {
-      console.error(error);
-      res.status(500).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
     }
   }
 
@@ -38,9 +48,12 @@ export class PhotoController {
     try {
       await PhotoService.deletePhoto(Number(req.params.id));
       res.status(200).json({ message: "ok" });
-    } catch (error: any) {
-      console.error(error);
-      res.status(500).json({ error: error.message });
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        res.status(500).json({ error: error.message });
+      } else {
+        res.status(500).json({ error: "An unknown error occurred" });
+      }
     }
   }
 }

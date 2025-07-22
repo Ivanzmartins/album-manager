@@ -8,7 +8,7 @@ export class PhotoService {
     return await photoRepository.find({ relations: ["album"] });
   }
 
-  static async getAlbumById(id: number, userId: number): Promise<Album> {
+  static async getAlbumById(id: number): Promise<Album> {
     const albumRepository = AppDataSource.getRepository(Album);
     const album = await albumRepository.findOneBy({ id });
 
@@ -61,7 +61,7 @@ export class PhotoService {
     let album: Album;
 
     if (data.albumId) {
-      album = await this.getAlbumById(data.albumId, data.userId);
+      album = await this.getAlbumById(data.albumId);
     } else if (data.newAlbumTitle) {
       album = await this.createAlbum(data.userId, data.newAlbumTitle);
     } else {

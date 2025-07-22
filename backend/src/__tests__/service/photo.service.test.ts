@@ -35,13 +35,13 @@ describe("PhotoService", () => {
 
   test("getAlbumById success", async () => {
     mockAlbumRepo.findOneBy.mockResolvedValue(mockAlbum);
-    const album = await PhotoService.getAlbumById(1, 123);
+    const album = await PhotoService.getAlbumById(1);
     expect(album).toEqual(mockAlbum);
   });
 
   test("getAlbumById failure", async () => {
     mockAlbumRepo.findOneBy.mockResolvedValue(null);
-    await expect(PhotoService.getAlbumById(99, 123)).rejects.toThrow(
+    await expect(PhotoService.getAlbumById(99)).rejects.toThrow(
       "Album not found"
     );
   });
