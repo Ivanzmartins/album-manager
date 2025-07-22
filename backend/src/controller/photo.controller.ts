@@ -4,7 +4,6 @@ import { PhotoService } from "../service/photo.service";
 export class PhotoController {
   static async getAllPhotos(req: Request, res: Response) {
     try {
-      const t = 10;
       const photos = await PhotoService.getAllPhotos();
       res.json(photos);
     } catch (error: unknown) {
