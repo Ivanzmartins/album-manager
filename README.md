@@ -13,31 +13,31 @@ Fullstack application for family photos with React (Frontend) and Node.js (Backe
 1. Clone the repository
 
 ```bash
-git clone git@github.com:Ivanzmartins/album-manager.git
-cd album-manager
+  git clone git@github.com:Ivanzmartins/album-manager.git
+  cd album-manager
 ```
 
 2. To run the entire project dockerized:
 
 ```bash
-docker-compose up -d
+  docker-compose up -d
 ```
 
 3. To run Backend separated:
 
 ```bash
-cd backend
-docker-compose up -d
-npm run migration:run
-npm install
-npm run dev
+  cd backend
+  docker-compose up -d
+  npm run migration:run
+  npm install
+  npm run dev
 ```
 
 🧪 Testing
 
 ```bash
-cd backend
-npm run test
+  cd backend
+  npm run test
 ```
 
 4. To run Frontend separated
