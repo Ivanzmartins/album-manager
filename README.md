@@ -8,7 +8,7 @@ Aplicação fullstack para gerenciamento de fotos familiares com React (Frontend
 
 - Node.js 18+
 - Docker e Docker Compose
-- npm ou yarn
+- npm
 
 ### 🔧 Configuração
 
