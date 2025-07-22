@@ -47,14 +47,16 @@ npm run test
 * Frontend: http://localhost:5173
 * Backend: http://localhost:3000
 
-🛠️ Tecnologias
-Frontend: React, TypeScript, TailwindCSS, React Query
+## Tecnologias Utilizadas
 
-Backend: Node.js, Exp⚙️ Funcionalidades
-✅ CRUD de álbuns e fotos
+<div align="left">
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" width="40" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" width="40" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vite/vite-original.svg" alt="Vite" width="40" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" alt="TailwindCSS" width="40" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" width="40" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" width="40" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width="40" />
+  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jest/jest-plain.svg" alt="Jest" width="40" />
+</div>
 
-✅ Visualização de álbuns/fotos de outros usuários
-
-✅ Testes unitáriosress, TypeORM, PostgreSQL
-
-Testes: Jest
