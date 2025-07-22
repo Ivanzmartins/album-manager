@@ -14,6 +14,7 @@ Fullstack application for family photos with React (Frontend) and Node.js (Backe
 
 ```bash
 git clone git@github.com:Ivanzmartins/album-manager.git
+cd album-manager
 ```
 
 2. To run the entire project dockerized:
