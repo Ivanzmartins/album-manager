@@ -88,7 +88,7 @@ const UserAlbums = () => {
       <div className="max-w-7xl mx-auto px-4 py-8">
         <Button variant="ghost" onClick={() => navigate("/")} className="mb-6">
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Voltar para Usuários
+          Back to Users
         </Button>
 
         <div className="bg-photo-card p-6 mb-8 rounded-lg border shadow-card">

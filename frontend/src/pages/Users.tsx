@@ -11,15 +11,15 @@ const Users = () => {
     <div className="min-h-screen bg-photo-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-foreground">Usuários</h1>
+          <h1 className="text-3xl font-bold text-foreground">Users</h1>
           <p className="text-muted-foreground mt-2">
-            Navegue pelos usuários e seus albuns
+            Navigate through the users and their albums
           </p>
         </div>
 
         {currentUser && (
           <div className="mb-8">
-            <h2 className="text-xl font-semibold mb-4">Meu Perfil</h2>
+            <h2 className="text-xl font-semibold mb-4">My profile</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               <UserCard
                 user={currentUser}
@@ -31,7 +31,7 @@ const Users = () => {
         )}
 
         <div>
-          <h2 className="text-xl font-semibold mb-4">Outros Usuários</h2>
+          <h2 className="text-xl font-semibold mb-4">Other users</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {otherUsers.map((user) => (
               <UserCard

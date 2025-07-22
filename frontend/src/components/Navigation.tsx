@@ -7,8 +7,8 @@ export const Navigation = () => {
   const location = useLocation();
 
   const navItems = [
-    { path: "/", label: "Usuários", icon: Users },
-    { path: "/upload", label: "Adicionar Foto", icon: Upload },
+    { path: "/", label: "Users", icon: Users },
+    { path: "/upload", label: "Upload photo", icon: Upload },
   ];
 
   return (

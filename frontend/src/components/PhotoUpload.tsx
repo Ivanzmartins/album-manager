@@ -42,17 +42,17 @@ export const PhotoUpload = () => {
 
     try {
       if (!selectedFile) {
-        toast.error("Nenhum arquivo selecionado");
+        toast.error("No file selected");
         return;
       }
 
       if (!isCreatingNewAlbum && !albumId) {
-        toast.error("Selecione um álbum para a foto");
+        toast.error("Select an album to the photo");
         return;
       }
 
       if (isCreatingNewAlbum && !newAlbumTitle.trim()) {
-        toast.error("Digite um título para o novo álbum");
+        toast.error("Type a title for the new album");
         return;
       }
 
@@ -65,7 +65,7 @@ export const PhotoUpload = () => {
         newAlbumTitle: isCreatingNewAlbum ? newAlbumTitle.trim() : undefined,
       });
 
-      toast.success("Foto enviada com sucesso!");
+      toast.success("Photo uploaded successfully!");
 
       setAlbumId("");
       setNewAlbumTitle("");
@@ -73,6 +73,7 @@ export const PhotoUpload = () => {
       setSelectedFile(null);
       if (fileInputRef.current) fileInputRef.current.value = "";
     } catch (error) {
+      console.error(error);
       toast.error("Erro ao enviar a foto");
     } finally {
       setIsUploading(false);
@@ -84,13 +85,13 @@ export const PhotoUpload = () => {
       <CardHeader>
         <CardTitle className="flex items-center space-x-2">
           <Upload className="h-5 w-5" />
-          <span>Adicionar uma foto</span>
+          <span>Upload new photo</span>
         </CardTitle>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <Label>Arquivo:</Label>
+            <Label>File:</Label>
             <Input
               ref={fileInputRef}
               type="file"
@@ -101,7 +102,7 @@ export const PhotoUpload = () => {
             />
             {selectedFile && (
               <p className="text-sm text-muted-foreground mt-1">
-                Selecionado: {selectedFile.name} (
+                Selected: {selectedFile.name} (
                 {(selectedFile.size / 1024).toFixed(2)} KB)
               </p>
             )}
@@ -109,7 +110,7 @@ export const PhotoUpload = () => {
 
           <div>
             <div className="flex items-center justify-between mb-2">
-              <Label>Álbum</Label>
+              <Label>Album</Label>
               <Button
                 type="button"
                 variant="outline"
@@ -120,7 +121,7 @@ export const PhotoUpload = () => {
               >
                 <Plus className="h-3 w-3" />
                 <span>
-                  {isCreatingNewAlbum ? "Selecione existente" : "Criar novo"}
+                  {isCreatingNewAlbum ? "Select existing" : "Create new"}
                 </span>
               </Button>
             </div>
@@ -130,7 +131,7 @@ export const PhotoUpload = () => {
                 type="text"
                 value={newAlbumTitle}
                 onChange={(e) => setNewAlbumTitle(e.target.value)}
-                placeholder="Digite um título"
+                placeholder="Title:"
                 disabled={isUploading}
               />
             ) : (
@@ -140,7 +141,7 @@ export const PhotoUpload = () => {
                 disabled={isUploading}
               >
                 <SelectTrigger>
-                  <SelectValue placeholder="Selecione um álbum" />
+                  <SelectValue placeholder="Select an album" />
                 </SelectTrigger>
                 <SelectContent>
                   {albums.map((album) => (
@@ -158,7 +159,7 @@ export const PhotoUpload = () => {
             className="w-full"
             disabled={isUploading || !selectedFile}
           >
-            {isUploading ? "Enviando..." : "Upload Foto"}
+            {isUploading ? "Uploading..." : "Upload Photo"}
           </Button>
         </form>
       </CardContent>
