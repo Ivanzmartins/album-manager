@@ -7,9 +7,7 @@ Fullstack application for family photos with React (Frontend) and Node.js (Backe
 
 ### Requirements
 
-- Node.js 18+
 - Docker and Docker Compose
-- npm
 
 ### 🔧 Configuration
 
@@ -19,7 +17,13 @@ Fullstack application for family photos with React (Frontend) and Node.js (Backe
 git clone git@github.com:Ivanzmartins/album-manager.git
 ```
 
-2. Backend
+2. To run the entire project dockerized:
+
+```bash
+docker-compose up -d
+```
+
+3. To run Backend separated:
 
 ```bash
 cd backend
@@ -36,10 +40,10 @@ cd backend
 npm run test
 ```
 
-3. Frontend
+4. To run Frontend separated
 
 ```bash
-  cd ../frontend
+  cd frontend
   npm install
   npm run dev
 ```
@@ -49,7 +53,7 @@ npm run test
 - Frontend: http://localhost:5173
 - Backend: http://localhost:`<defined in .env PORT >`
 
-## Tecnologias Utilizadas
+## Technologies used
 
 <div align="left">
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" width="40" />
