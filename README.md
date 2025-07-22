@@ -15,14 +15,13 @@ Aplicação fullstack para gerenciamento de fotos familiares com React (Frontend
 1. Clone o repositório
 
 ```bash
-git clone [git@github.com:Ivanzmartins/album-manager.git]
+git clone git@github.com:Ivanzmartins/album-manager.git
 ```
 2. Backend
  ```bash
   cd backend
   npm install
   npm run dev
-  npm run migration:run
 ```
 
 Em outro terminal (ainda no diretório backend):
